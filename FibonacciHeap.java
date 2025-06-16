@@ -100,7 +100,7 @@ public class FibonacciHeap
 	}
 	
 	public ArrayList<Integer> addZeroUpTo(ArrayList<Integer> list, int to)
-	{
+	{		
 		while (list.size() <= to){
 			list.add(0);
 		}
@@ -111,7 +111,21 @@ public class FibonacciHeap
 	
 	public void toBucket(HeapNode x)
 	{
-		
+		ArrayList<Integer> B = new ArrayList<>();
+
+		x.prev.next = null;
+
+		while(x != null)
+		{
+			HeapNode y = x;
+			x = x.next;
+			int Brank = y.rank;
+
+			if (B.size() >= Brank)
+				while ( B[Brank]!= null ){
+
+			}
+		}
 	}
 
 	public int consolidate(){
@@ -121,6 +135,8 @@ public class FibonacciHeap
 	
 	public int deleteMin()
 	{
+		java.util.ArrayList<Object> buckets = new java.util.ArrayList<>();
+
 		if (this.size == 0) //empty tree
 			return 0;
 
