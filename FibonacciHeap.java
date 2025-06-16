@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * FibonacciHeap
  *
@@ -86,7 +88,7 @@ public class FibonacciHeap
 	 * Return the number of links.
 	 *
 	 */
-	public HeapNode pull(HeapNode node)
+	public HeapNode pull(HeapNode node) //take out node from linkedList, returns its prev
 	{
 		HeapNode before = node.prev;
 		HeapNode after = node.next;
@@ -97,25 +99,52 @@ public class FibonacciHeap
 		return before;
 	}
 	
-	 public int deleteMin()
+	public ArrayList<Integer> addZeroUpTo(ArrayList<Integer> list, int to)
+	{
+		while (list.size() <= to){
+			list.add(0);
+		}
+		list.add(1);
+
+		return list;
+	}
+	
+	public void toBucket(HeapNode x)
 	{
 		
-		if (this.size == 1)
+	}
+
+	public int consolidate(){
+		return 0;
+	}
+	
+	
+	public int deleteMin()
+	{
+		if (this.size == 0) //empty tree
+			return 0;
+
+		size --; 
+
+		if (this.size == 1) //one node tree
 		{
 			this.min = null;
-			size --; 
+			this.numTrees --;
 			return 0;
 		}
-		else{
-			HeapNode childList = this.min.child ;
+		
+		//else
+		HeapNode childList = this.min.child ;  // can be null 
+		this.min = pull(this.min); //pulls out min from listOfTrees, replaces min with its prev
+
+		if (childList != null) // meld two lists
+		{
 			childList.parent = null;
-			this.min = pull(this.min); //acts like a pointer to the list without min
+			meldByTwoNodes(this.min, childList); 
 		}
 
-		this.size --;
-
-		//meld (childList, this.min)
 		//total links += consolidating
+
 		
 		return 46; // should be replaced by student code
 
@@ -168,6 +197,18 @@ public class FibonacciHeap
 	}
 
 
+
+	public void meldByTwoNodes(HeapNode x, HeapNode y){
+
+		HeapNode nextX = x.next;
+		HeapNode prevY = y.prev;
+
+		x.next = y;
+		y.prev = x;
+
+		nextX.prev = prevY; 
+		prevY.next = nextX;
+	}
 	/**
 	 * 
 	 * Meld the heap with heap2
@@ -175,7 +216,11 @@ public class FibonacciHeap
 	 */
 	public void meld(FibonacciHeap heap2)
 	{
-		return; // should be replaced by student code   		
+		meldByTwoNodes(this.min, heap2.min); 
+		
+		if(heap2.min.key < this.min.key)
+			this.min = heap2.min;
+		
 	}
 
 	/**
