@@ -47,13 +47,26 @@ public class FibonacciHeap
 	 */
 	public HeapNode insert(int key, String info) 
 	{    
-		if (min == null){
-			
-		}
-		else{
-			
+		if (min == null) {
+			this.size ++;
+			this.numTrees ++;
 		}
 		
+		HeapNode node = new HeapNode(key,info);
+
+		if (this.min == null) {
+			this.min = node;
+			node.next = node;
+			node.prev = node;
+		}
+		else{
+			insertAfter(this.min, node);
+
+			if (this.min.key > key){
+				this.min = node;
+			}
+		}
+	
 		return node; 
 	}
 
@@ -198,5 +211,13 @@ public class FibonacciHeap
 		public HeapNode prev;
 		public HeapNode parent;
 		public int rank;
+		public int mark;
+
+		public HeapNode(int key, String info){
+			this.key = key;
+			this.info = info;
+			this.rank = 0;
+			this.mark = 0;
+		}
 	}
 }
