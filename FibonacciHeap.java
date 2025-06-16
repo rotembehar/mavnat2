@@ -41,9 +41,10 @@ public class FibonacciHeap
 	{    
 		if (min == null){
 			
+
 		}
 		else{
-			
+
 		}
 		
 		return null; // should be replaced by student code
@@ -58,7 +59,8 @@ public class FibonacciHeap
 	 */
 	public HeapNode findMin()
 	{
-		return null; // should be replaced by student code
+		
+		return this.min; // should be replaced by student code
 	}
 
 	/**
@@ -67,8 +69,37 @@ public class FibonacciHeap
 	 * Return the number of links.
 	 *
 	 */
-	public int deleteMin()
+	public HeapNode pull(HeapNode node)
 	{
+		HeapNode before = node.prev;
+		HeapNode after = node.next;
+
+		before.next = after;
+		after.prev = before;
+
+		return before;
+	}
+	
+	 public int deleteMin()
+	{
+		
+		if (this.size == 1)
+		{
+			this.min = null;
+			size --; 
+			return 0;
+		}
+		else{
+			HeapNode childList = this.min.child ;
+			childList.parent = null;
+			this.min = pull(this.min); //acts like a pointer to the list without min
+		}
+
+		this.size --;
+
+		//meld (childList, this.min)
+		//total links += consolidating
+		
 		return 46; // should be replaced by student code
 
 	}
@@ -163,5 +194,13 @@ public class FibonacciHeap
 		public HeapNode prev;
 		public HeapNode parent;
 		public int rank;
+		public int mark; 
+
+		public HeapNode(int key, String info){
+			this.key = key;
+			this.info = info;
+			this.mark = 0;
+		 
+		}
 	}
 }
