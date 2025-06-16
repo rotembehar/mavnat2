@@ -29,7 +29,7 @@ public class FibonacciHeap
 		this.c = c;
 	}
 
-	// utility function
+	// utility function for insert
 	public void insertAfter(HeapNode node1, HeapNode node2)
 	{
 		node2.next = node1.next;
