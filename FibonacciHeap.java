@@ -7,6 +7,11 @@
 public class FibonacciHeap
 {
 	public HeapNode min;
+	public int size;
+	public int totalLinks;
+	public int totalCuts;
+	public int numTrees;
+	public int c ;
 	
 	/**
 	 *
@@ -16,6 +21,12 @@ public class FibonacciHeap
 	 */
 	public FibonacciHeap(int c)
 	{
+		this.min = null;
+		this.size =0;
+		this.totalCuts=0;
+		this.totalLinks=0;
+		this.numTrees =0;
+		this.c = c;
 		// should be replaced by student code
 	}
 
@@ -28,7 +39,16 @@ public class FibonacciHeap
 	 */
 	public HeapNode insert(int key, String info) 
 	{    
+		if (min == null){
+			
+		}
+		else{
+			
+		}
+		
 		return null; // should be replaced by student code
+
+
 	}
 
 	/**
